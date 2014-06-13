@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20140612195323) do
   create_table "answers", force: true do |t|
     t.integer  "user_id"
     t.integer  "question_id"
-    t.float    "range_answer"
-    t.string   "option_1_or_2_answer"
+    t.integer  "range_answer"
+    t.string   "option_answer"
     t.string   "comment"
     t.integer  "vote_count"
     t.datetime "created_at"
@@ -29,9 +29,11 @@ ActiveRecord::Schema.define(version: 20140612195323) do
 
   create_table "questions", force: true do |t|
     t.integer  "user_id"
-    t.string   "range_question"
+    t.string   "content"
     t.string   "option_1"
     t.string   "option_2"
+    t.integer  "range_min"
+    t.integer  "range_max"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,6 +53,11 @@ ActiveRecord::Schema.define(version: 20140612195323) do
     t.string   "profile_pic_url"
     t.string   "answer_id_vote"
     t.float    "location"
+    t.integer  "birth_year"
+    t.string   "ethnicity"
+    t.string   "religion"
+    t.string   "gender"
+    t.string   "orientation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
