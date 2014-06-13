@@ -11,6 +11,13 @@
 
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+  <div><%= f.label :birth_year %><br />
+    <%= f.text_field :birth_year %></div>
+  <div><%= f.label :gender %><%= f.select :gender, ['-', 'Female', 'Male'] %></div>
+
+  <div><%= f.label "Sexual Orientation" %><%= f.select :orientation, ['-', 'Bi-Sexual', 'Gay', 'Lesbian', 'Straight', 'Transsexual', 'Transgender', 'Other'] %></div>
+  <div><%= f.label :ethnicity %><%= f.select :ethnicity, ['-', 'American Indian', 'Asian', 'Black/African American', 'Hispanic/Latino', 'White', 'Other'] %></div>
+  <div><%= f.label "Religious Views" %><%= f.select :religion, ['-', 'Agnostic', 'Atheist', 'Buddhist', 'Christian', 'Hindu', 'Jewish',  'Muslim', 'Other'] %></div>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
