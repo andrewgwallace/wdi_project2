@@ -1,1 +1,28 @@
 
+  <div class="col span_2_of_3_left">
+<h4> Create new question </h4>
+<h5> What type of question are you asking? </h5>
+<button type="submit" name="yes_no" class="yes_no" value="yes_no">Yes or no</button>
+<button type="submit" name="this_that" class="this_that"value="this_that">This or that</button>
+<button type="submit" name="ranking" class="ranking"value="ranking">Rank</button>
+
+
+
+<%= form_for @question, url: "/questions", method: "POST" do |f| %>
+  <%= f.text_field :content, { placeholder: "Question content" } %>
+  <%= f.text_field :option_1, { placeholder: "Option 1" } %>
+  <%= f.text_field :option_2, { placeholder: "Option 2" } %>
+  <%= f.text_field :range_min, { placeholder: "Minimum value" } %>
+  <%= f.text_field :range_max, { placeholder: "Maximum value" } %>
+  <%= f.submit "Create" %>
+<% end %>
+
+
+
+<!-- <form action="demo_form.asp">
+  First name: <input type="text" name="fname"><br>
+  Last name: <input type="text" name="lname"><br>
+  <input type="submit" value="Submit">
+</form>
+
+ -->
