@@ -4,6 +4,12 @@ wdi_project2
 ## PROJECT 2 README
 ####Andrew Wallance, Victor Rodriguez, Joel Rosenblatt, & Declan Van Welie
 
+* Github Repo: 
+* <a href="https://github.com/KLIMTHAUS/wdi_project2">https://github.com/KLIMTHAUS/wdi_project2</a>
+* Application hosted on Heroku:
+* <a href="http://fierce-atoll-6518.herokuapp.com/">http://fierce-atoll-6518.herokuapp.com/</a>
+	
+
 ## PLANNING & DELIVERABLES
 
 ####Project Plan deliverables:
@@ -51,6 +57,7 @@ Our MVP seems viable within the week deadline, and we have an ice-box brimming w
 * polldaddy.com
 * api.polleverywhere
 * geocoder
+* https://developer.mozilla.org/en-US/docs/WebAPI/Using_geolocation
 
 * **Milestones.** 
 * We will give you some dates and milestones to help keep you on track. Outline some specific milestones for yourself based on how you prefer to work, as they fit into our class milestones.
@@ -66,6 +73,7 @@ Our MVP seems viable within the week deadline, and we have an ice-box brimming w
 	- Basic CRUD finished
 	- Auth finished
 * Sunday Morning 
+	- Ajax finished
 	- Basic seeding finished
 	- Basic visualizations finished
 * Monday Morning
