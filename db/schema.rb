@@ -16,6 +16,26 @@ ActiveRecord::Schema.define(version: 20140612195323) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "anwers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
+    t.float    "range_answer"
+    t.string   "option_1_or_2_answer"
+    t.string   "comment"
+    t.integer  "vote_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", force: true do |t|
+    t.integer  "user_id"
+    t.string   "range_question"
+    t.string   "option_1"
+    t.string   "option_2"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -31,26 +51,6 @@ ActiveRecord::Schema.define(version: 20140612195323) do
     t.string   "profile_pic_url"
     t.string   "answer_id_vote"
     t.float    "location"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "questions", force: true do |t|
-    t.integer  "user_id"
-    t.string   "range_question"
-    t.string   "option_1"
-    t.string   "option_2"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "anwers", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "question_id"
-    t.float    "range_answer"
-    t.string   "option_1_or_2_answer"
-    t.string   "comment"
-    t.integer  "vote_count"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
