@@ -1,0 +1,34 @@
+<script>
+  $(function() {
+    $( "#slider" ).slider();
+  });
+  </script>
+
+<!-- Determine what type of question was asked -->
+
+<%= if @question.option_1 == "yes" %>
+<div id="options_buttons">
+
+<button id="option_a_button"><%= @a_option_1 %></button>
+<button id="option_b_button"><%= @a_option_2 %></button>
+
+
+</div>
+
+<% elsif @question.option_1 != nil && @question_range_min == nil %>
+<div id="options_buttons">
+
+<button id="option_a_button"><%= @a_option_1 %></button>
+<button id="option_b_button"><%= @a_option_2 %></button>
+
+
+</div>
+<% else %>
+<div id="range"></div>
+<div id="slider"></div>
+<% end %>
+
+<input id="comment" type="text"/>
+<button id="submit" type="submit">Submit</button>
+
+
