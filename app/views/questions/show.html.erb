@@ -1,0 +1,44 @@
+<h2><%= @question.content %></h2>
+
+<!-- <form id='answer_form'>
+  <% if @question.option_1 != nil %>
+    <p><%= @question.option_1 %><input type="checkbox" name='option_answer'value=<%= @question.option_1 %>></p>
+    <p><%= @question.option_2 %><input type="checkbox" name='option_answer'value=<%= @question.option_2 %>></p>
+  <% else %>
+    <p><input type="range" step="1" class="jquerymobileslider" data-highlight="true" data-show-value="true" data-popup-enabled="true" name="range_answer" id="range_answer" min=<%= @question.range_min %> max=<%= @question.range_max %>></p>
+  <% end %>
+    <input type="text" name="comment" placeholder="Optional">
+    <input type="hidden" name="question_id" value=<%= @question.id %>>
+    <input type="hidden" name="user_id" value=<%= current_user.id %>>
+  </br>
+    <input type="submit">
+  </form> -->
+
+  <%= form_for(@answer, remote: true) do |f| %>
+  <%= f.hidden_field :question_id, value: @question.id %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+   <% if @question.option_1 != nil %>
+   <p><%= f.select :option_answer, [@question.option_1, @question.option_2] %></p>
+    <% else %>
+    <%= f.range_field :range_answer, :min=>@question.range_min, :max=>@question.range_max, :class=>"slide", :id=>"slider1"%>
+  <% end %>
+  <p><%= f.text_area :comment, placeholder: "Optional", size: "20x10" %></p>
+  <p><%= f.submit "Create" %></p>
+  <% end %>
+
+<% @answers.each do |answer| %>
+  <% if answer.option_answer != nil %>
+    <p><%= answer.option_answer %></p>
+  <% else %>
+    <%= answer.range_answer %>
+  <% end %>
+  <small><%= answer.comment %><small>
+<% end %>
+
+<div class='answer-manager'>
+
+<script id="answerTemplate" type="text/template">
+
+</script>
+
+</div>
