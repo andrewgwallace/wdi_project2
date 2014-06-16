@@ -45,20 +45,23 @@
 </br>
 </center>
 
+<button type="button" class="next">Next</button>
 
+<div id="container">
 
-<div class='question-manager'>
+  <div class='question-manager'>
 
-  <script id="questionTemplate" type="text/template">
-    <div class="question_info"<%%= id %>>
-      <h4 class="question_content"><%%= content %></h4>
-      <div class="question_options">
-        <button type="button" class="question_option_1"><%%= option_1 %></button>
-        <button type="button" class="question_option_2"><%%= option_2 %></button>
+    <script id="questionTemplate" type="text/template">
+      <div class="question_info"<%%= id %>>
+        <h4 class="question_content"><%%= content %></h4>
+        <div class="question_options">
+          <button type="button" class="question_option_1"><%%= option_1 %></button>
+          <button type="button" class="question_option_2"><%%= option_2 %></button>
+        </div>
+        <div class="question_display">
+        </div>
       </div>
-      <div class="question_display">
-      </div>
-    </div>
-  </script>
+    </script>
 
+  </div>
 </div>

@@ -16,11 +16,70 @@ function QuestionView(model){
   this.el = undefined;
 }
 
+QuestionView.prototype.render = function(){
+  console.log(this.model);
+  var newElement = $("<h1 class='question_list'>").html(this.model.content);
+  $('.question-manager').html(newElement);
+  this.addGraph();
+  return this;
+}
+
+QuestionView.prototype.addGraph = function() {
+        $('#container').highcharts({
+          chart: {
+              type: 'column'
+          },
+          title: {
+              text: this.model.content
+          },
+          xAxis: {
+              categories: [this.model.option_1, this.model.option_2]
+          },
+          yAxis: {
+              title: {
+                  text: 'Number of answers'
+              }
+          },
+          series: [{
+              name: this.model.option_1,
+              data: [5]
+          }, {
+              name: this.model.option_2,
+              data: [9]
+          }]
+      });
+        return this;
+}
 
 
 // ************ Collection *************
 function QuestionsCollection(){
-  this.models = {};
+  this.models = [];
+  this.currentRecord = 0;
+}
+
+QuestionsCollection.prototype.appendListeners = function () {
+  var self = this;
+  $('.next').on('click', function(){
+    self.nextQuestion();
+  })
+}
+
+QuestionsCollection.prototype.renderCurrentQuestion = function() {
+  var questionView = new QuestionView(this.models[this.currentRecord]);
+  questionView.render();
+}
+
+QuestionsCollection.prototype.nextQuestion = function () {
+  var lengthArray = this.models.length;
+  this.currentRecord++ ;
+  console.log("this is the current record", this.currentRecord);
+   if (this.currentRecord === 9) {
+    this.currentRecord = 0;
+    this.fetch();
+  };
+  this.renderCurrentQuestion();
+  console.log('working');
 }
 
 QuestionsCollection.prototype.create = function(paramObject){
@@ -32,6 +91,7 @@ QuestionsCollection.prototype.create = function(paramObject){
   }).done(function(data){
     console.log(data);
     questionsCollection.add(data);
+
   });
 }
 
@@ -47,43 +107,45 @@ QuestionsCollection.prototype.fetch = function(){
       for(id in data){
       self.add(data[id]);
       }
+      self.displayEntireCollection()
+
     });
 }
 
-var questionsCollection = new QuestionsCollection();
-
 QuestionsCollection.prototype.add = function(questionJSON){
   var newQuestion = new Question(questionJSON);
-  this.models[questionJSON.id] = newQuestion;
+  this.models.push(questionJSON);
   $(this).trigger('trigg');
 }
 
-function displayEntireCollection(){
-  $('.questions').empty();
-  for(id in questionsCollection.models){
-    var question = questionsCollection.models[id];
-    var questionView = new QuestionView(question);
-    // $('.questions').append(questionView.render().el);
+QuestionsCollection.prototype.displayEntireCollection = function(){
+    $('.questions').empty();
+      this.renderCurrentQuestion();
   }
-}
-
-
 
 function resetForm($form) {
     $form.find('input:text, input:password, input:file, select, textarea').val('');
     $form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
 }
 
-
+boo = 0;
 
 
 $(function(){
 
+  var questionsCollection = new QuestionsCollection();
+  questionsCollection.appendListeners();
+
   questionsCollection.fetch();
 
-  $(questionsCollection).on('trigg', function(){
-    displayEntireCollection();
-  })
+  function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
+
+  // $(questionsCollection).on('trigg', function(){
+  //   displayEntireCollection();
+  // })
 
 
   $('#question_form').on('submit', function(e){

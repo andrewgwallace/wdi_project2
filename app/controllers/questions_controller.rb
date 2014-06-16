@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   if current_user
     @user= User.find(current_user.id)
   end
-  questions = Question.all
+  questions = Question.last(10)
   respond_with questions
   @current_user = current_user
   end
