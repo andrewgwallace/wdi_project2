@@ -2,11 +2,10 @@ class QuestionsController < ApplicationController
 
   respond_to :json, :html
 
-  before_action :authenticate_user!
-  # user_signed_in?
   def index
-  # Including @user in order to create questions with a user_id params
-  @user= User.find(current_user.id)
+  if current_user
+    @user= User.find(current_user.id)
+  end
   questions = Question.all
   respond_with questions
   @current_user = current_user
@@ -14,7 +13,6 @@ class QuestionsController < ApplicationController
 
 
   def create
-    # @question = Question.find(params[:id])
      question = Question.create(question_params)
      respond_with question
 
@@ -25,10 +23,6 @@ class QuestionsController < ApplicationController
     @answer = Answer.new
     @answers = @question.answers
   end
-
-  # def show
-  #   @questions = Question.all
-  # end
 
 private
 

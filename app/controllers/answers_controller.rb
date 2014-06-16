@@ -49,29 +49,3 @@ private
   end
 
 end
-
-  # t.integer  "user_id"
-  # t.integer  "question_id"
-  # t.integer  "range_answer"
-  # t.string   "option_answer"
-  # t.string   "comment"
-  # t.integer  "vote_count"
-  # t.datetime "created_at"
-  # t.datetime "updated_at"
-
-  # answers     GET    /answers(.:format)             answers#index
-  #             POST   /answers(.:format)             answers#create
-  # new_answer  GET    /answers/new(.:format)         answers#new
-  # answer      GET    /answers/:id(.:format)         answers#show
-  #             PATCH  /answers/:id(.:format)         answers#update
-  #             PUT    /answers/:id(.:format)         answers#update
-  #             DELETE /answers/:id(.:format)         answers#destroy
-
-
-  # def option_choices(question, option_1, option_2)
-  #   answer = Answer.where(question_id: params[:id])
-  # end
-
-  # def ranges
-
-  # end
