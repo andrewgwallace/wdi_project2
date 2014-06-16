@@ -1,28 +1,64 @@
-
-  <div class="col span_2_of_3_left">
-<h4> Create new question </h4>
-<h5> What type of question are you asking? </h5>
-<button type="submit" name="yes_no" class="yes_no" value="yes_no">Yes or no</button>
-<button type="submit" name="this_that" class="this_that"value="this_that">This or that</button>
-<button type="submit" name="ranking" class="ranking"value="ranking">Rank</button>
-
-
-
-<%= form_for @question, url: "/questions", method: "POST" do |f| %>
-  <%= f.text_field :content, { placeholder: "Question content" } %>
-  <%= f.text_field :option_1, { placeholder: "Option 1" } %>
-  <%= f.text_field :option_2, { placeholder: "Option 2" } %>
-  <%= f.text_field :range_min, { placeholder: "Minimum value" } %>
-  <%= f.text_field :range_max, { placeholder: "Maximum value" } %>
-  <%= f.submit "Create" %>
+</br>
+<center>
+<% if current_user %>
+  <h1>Ask away...</h1>
+  <ul class="tabs" data-tab>
+    <li class="tab-title active"><a href="#panel1a">Yes or No</a></li>
+    <li class="tab-title"><a href="#panel2a">This or That</a></li>
+    <li class="tab-title"><a href="#panel3a">Rank</a></li>
+  </ul>
+  <div class="tabs-content vertical">
+    <div class="content active" id="panel1a">
+      <form id='question_form'>
+        <input type="text" class='yes_no_form' name='yes_no_content'placeholder="Question">
+        <input type="hidden" class='yes_no_form' name='yes' value='yes'>
+        <input type="hidden" class='yes_no_form' name='no' value='no'>
+        <input type="hidden" name="user_id" value=<%= @current_user.id %>>
+        <input type="submit" value="Ask!">
+      </form>
+    </div>
+    <div class="content" id="panel2a">
+      <form id='question_form_this'>
+        <input type="text" class='this_that_form' name='this_that_content'placeholder="Question">
+        <input type="text"  class='this_that_form' name='option_1'placeholder="Option A">
+        <input type="text"  class='this_that_form' name='option_2'placeholder="Option B">
+        <input type="hidden" name="user_id" value=<%= @current_user.id %>>
+        <input type="submit" value="Ask!">
+      </form>
+    </div>
+    <div class="content" id="panel3a">
+      <form id='question_form_rank'>
+        <input type="text" class='ranking_form' name='ranking_form_content' placeholder="Question">
+        <input type="text" class='ranking_form' name='range_min' placeholder="Minimum value">
+        <input type="text" class='ranking_form' name='range_max' placeholder="Maximum value">
+        <input type="hidden" name="user_id" value=<%= @current_user.id %>>
+        <input type="submit" value="Ask!">
+      </form>
+    </div>
+  </div>
+<% else %>
+  <h3>Looks like you're not signed in.</h3>
+  <h4>Feel free to browse around for questions</h4>
+  <p>Sign up or log in to answer questions and ask the community.</p>
+  <button><%= link_to "Sign Up", new_user_registration_path %></button>&nbsp&nbsp&nbsp&nbsp&nbsp<button><%= link_to "Sign In", new_user_session_path %></button>
 <% end %>
+</br>
+</center>
 
 
 
-<!-- <form action="demo_form.asp">
-  First name: <input type="text" name="fname"><br>
-  Last name: <input type="text" name="lname"><br>
-  <input type="submit" value="Submit">
-</form>
+<div class='question-manager'>
 
- -->
+  <script id="questionTemplate" type="text/template">
+    <div class="question_info"<%%= id %>>
+      <h4 class="question_content"><%%= content %></h4>
+      <div class="question_options">
+        <button type="button" class="question_option_1"><%%= option_1 %></button>
+        <button type="button" class="question_option_2"><%%= option_2 %></button>
+      </div>
+      <div class="question_display">
+      </div>
+    </div>
+  </script>
+
+</div>

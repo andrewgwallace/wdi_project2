@@ -2,29 +2,46 @@
 <html>
 <head>
   <title>WdiProject2</title>
+  <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 </head>
 <body>
-  <div id="user_nav">
-  <% if current_user %>
-  <nav class="user_nav">
-    <p><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></p>
-  </nav>
-  <% else %>
-  <nav class="user_nav">
-    <%= link_to "Sign Up", new_user_registration_path %> |
-    <%= link_to "Sign In", new_user_session_path %>
+  <div class="sticky">
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1 class="logo">Q</h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+      <section class="top-bar-section" data-topbar data-options="sticky_on: large">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <li class="has-dropdown">
+          <a href="#">Menu</a>
+          <ul class="dropdown">
+            <% if current_user %>
+              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+            <% else %>
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+              <li><%= link_to "Sign In", new_user_session_path %></li>
+            <% end %>
+          </ul>
+        </ul>
+      </section>
     </nav>
-  <% end %>
   </div>
 
-  <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, :id => "flash_#{name}" %>
-  <% end %>
 
-<%= yield %>
+  <%= yield %>
+
+  <script>
+    $(document).foundation();
+  </script>
 
 </body>
 </html>
+
