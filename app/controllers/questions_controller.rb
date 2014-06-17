@@ -22,8 +22,16 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer = Answer.new
-    @answers = @question.answers
+
+    respond_to do |f|
+      f.html
+      f.json {render :json => [@question.answers.where(option_answer: @question.option_1).length,
+        @question.answers.where(option_answer: @question.option_2).length]}
+
+    end
+
   end
+
 
 private
 
@@ -32,4 +40,3 @@ private
     end
 
 end
-

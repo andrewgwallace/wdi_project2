@@ -37,9 +37,9 @@ function QuestionView(model){
 }
 
 QuestionView.prototype.render = function(){
-  console.log(this.model);
-  var newElement = $("<h1 class='question_list'>").html(this.model.results[0]);
-  $('.question-manager').html(newElement);
+  // console.log(this.model);
+  // var newElement = $("<h1 class='question_list'>").html(this.model.results[0]);
+  // $('.question-manager').html(newElement);
   this.addGraph();
   return this;
 }
