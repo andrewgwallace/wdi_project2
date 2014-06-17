@@ -1,42 +1,46 @@
+<!-- Form and tabs for question creation -->
 </br>
 <center>
 <% if current_user %>
   <h1>Ask away...</h1>
-  <ul class="tabs" data-tab>
-    <li class="tab-title active"><a href="#panel1a">Yes or No</a></li>
-    <li class="tab-title"><a href="#panel2a">This or That</a></li>
-    <li class="tab-title"><a href="#panel3a">Rank</a></li>
-  </ul>
-  <div class="tabs-content vertical">
-    <div class="content active" id="panel1a">
-      <form id='question_form'>
-        <input type="text" class='yes_no_form' name='yes_no_content'placeholder="Question">
+  <a href="" data-reveal-id="yesnoModal"><p class="secondary button">Yes or No</p></a>
+  <a href="" data-reveal-id="thisthatModal"><p class="secondary button">This or That</p></a>
+  <a href="" data-reveal-id="rankModal"><p class="secondary button">Rank</p></a>
+    <div id="yesnoModal" class="reveal-modal" data-reveal>
+      </br>
+      <form id='question_form' class"questionaire">
+        <input type="text" class='yes_no_form' name='yes_no_content'placeholder="Question"></br>
         <input type="hidden" class='yes_no_form' name='yes' value='yes'>
         <input type="hidden" class='yes_no_form' name='no' value='no'>
-        <input type="hidden" name="user_id" value=<%= @current_user.id %>>
+        <input type="hidden" name="user_id" value=<%= @current_user.id %>></br>
         <input type="submit" value="Ask!">
       </form>
+      <a class="close-reveal-modal">&#215;</a>
     </div>
-    <div class="content" id="panel2a">
-      <form id='question_form_this'>
-        <input type="text" class='this_that_form' name='this_that_content'placeholder="Question">
-        <input type="text"  class='this_that_form' name='option_1'placeholder="Option A">
-        <input type="text"  class='this_that_form' name='option_2'placeholder="Option B">
-        <input type="hidden" name="user_id" value=<%= @current_user.id %>>
+    <div id="thisthatModal" class="reveal-modal" data-reveal>
+      </br>
+      <form id='question_form_this' class"questionaire">
+        <input type="text" class='this_that_form' name='this_that_content'placeholder="Question"></br></br>
+        <input type="text"  class='this_that_form' name='option_1'placeholder="Option A"></br>
+        <input type="text"  class='this_that_form' name='option_2'placeholder="Option B"></br>
+        <input type="hidden" name="user_id" value=<%= @current_user.id %>></br>
         <input type="submit" value="Ask!">
       </form>
+      <a class="close-reveal-modal">&#215;</a>
     </div>
-    <div class="content" id="panel3a">
-      <form id='question_form_rank'>
-        <input type="text" class='ranking_form' name='ranking_form_content' placeholder="Question">
-        <input type="text" class='ranking_form' name='range_min' placeholder="Minimum value">
-        <input type="text" class='ranking_form' name='range_max' placeholder="Maximum value">
-        <input type="hidden" name="user_id" value=<%= @current_user.id %>>
+    <div id="rankModal" class="reveal-modal" data-reveal>
+      </br>
+      <form id='question_form_rank' class"questionaire">
+        <input type="text" class='ranking_form' name='ranking_form_content' placeholder="Question"></br></br>
+        <input type="text" class='ranking_form' name='range_min' placeholder="Minimum value"></br>
+        <input type="text" class='ranking_form' name='range_max' placeholder="Maximum value"></br>
+        <input type="hidden" name="user_id" value=<%= @current_user.id %>></br>
         <input type="submit" value="Ask!">
       </form>
+      <a class="close-reveal-modal">&#215;</a>
     </div>
-  </div>
 <% else %>
+  <!-- Sign on and in links for users not logged in -->
   <h3>Looks like you're not signed in.</h3>
   <h4>Feel free to browse around for questions</h4>
   <p>Sign up or log in to answer questions and ask the community.</p>
@@ -45,23 +49,49 @@
 </br>
 </center>
 
-<button type="button" class="next">Next</button>
-
-<div id="container">
-
-  <div class='question-manager'>
-
-    <script id="questionTemplate" type="text/template">
-      <div class="question_info"<%%= id %>>
-        <h4 class="question_content"><%%= content %></h4>
-        <div class="question_options">
-          <button type="button" class="question_option_1"><%%= option_1 %></button>
-          <button type="button" class="question_option_2"><%%= option_2 %></button>
-        </div>
-        <div class="question_display">
-        </div>
-      </div>
-    </script>
-
-  </div>
+<!-- Trending div -->
+<center>
+<div id="trending">
+  <% @questions_all.each do |question|%>
+    <!-- Link to modal for answering question -->
+    <a href="" data-reveal-id="questModal"><p class="trend_quest"><%= question.content %></p></a></br>
+  <% end %>
 </div>
+</center>
+
+<!-- Modal for answering question -->
+<div id="questModal" class="reveal-modal" data-reveal>
+  <div id="actual_question">
+    </br></br></br></br></br></br></br>
+  </div>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<!-- Results modal ref link the people are talking in layout -->
+<div id="myModal" class="reveal-modal" data-reveal>
+
+  <div id="container">
+
+    <div class='question-manager'>
+
+      <script id="questionTemplate" type="text/template">
+        <div class="question_info"<%%= id %>>
+          <h4 class="question_content"><%%= content %></h4>
+          <div class="question_options">
+            <button type="button" class="question_option_1"><%%= option_1 %></button>
+            <button type="button" class="question_option_2"><%%= option_2 %></button>
+          </div>
+          <div class="question_display">
+          </div>
+        </div>
+      </script>
+
+    </div>
+  </div>
+  <!-- Next result button -->
+  <button type="button" class="next secondary button">Next</button>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+</br>
+
+

@@ -10,34 +10,47 @@
   <script src="http://code.highcharts.com/highcharts.js"></script>
 </head>
 <body>
-  <div class="sticky">
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1 class="logo">Q</h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-      </ul>
-      <section class="top-bar-section" data-topbar data-options="sticky_on: large">
-        <!-- Right Nav Section -->
-        <ul class="right">
-          <li class="has-dropdown">
-          <a href="#">Menu</a>
-          <ul class="dropdown">
-            <% if current_user %>
-              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-            <% else %>
-              <li><%= link_to "Sign Up", new_user_registration_path %></li>
-              <li><%= link_to "Sign In", new_user_session_path %></li>
-            <% end %>
-          </ul>
+  <!-- Topbar -->
+  <div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+      <nav class="tab-bar">
+        <section class="middle tab-bar-section">
+          <a href="/"><h1 class="logo">Q</h1></a>
+        </section>
+        <section class="right-small">
+          <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+        </section>
+      </nav>
+
+      <!-- Off canvas menu -->
+      <aside class="right-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li><label>Menu</label></li>
+          <% if current_user %>
+            <li><a href="/">Home</a></li>
+            <li><a href="">My Q</a></li>
+            <li><a href="">Answer</a></li>
+            <li><a href="" data-reveal-id="myModal">The people are talking...</a></li>
+            <li><label>Settings</label></li>
+            <li><%= link_to "Account", edit_user_registration_path %></li>
+            <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+          <% else %>
+            <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            <li><%= link_to "Sign In", new_user_session_path %></li>
+          <% end %>
         </ul>
+      </aside>
+
+      <section class="main-section">
+
+        <%= yield %>
+
       </section>
-    </nav>
+
+      <a class="exit-off-canvas"></a>
+
+    </div>
   </div>
-
-
-  <%= yield %>
 
   <script>
     $(document).foundation();
