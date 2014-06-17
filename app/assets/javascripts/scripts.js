@@ -354,7 +354,7 @@ QuestionsCollection.prototype.nextQuestion = function () {
   var lengthArray = this.models.length;
   this.currentRecord++ ;
   console.log("this is the current record", this.currentRecord);
-   if (this.currentRecord === 9) {
+   if (this.currentRecord === lengthArray-1) {
     this.currentRecord = 0;
     this.fetch();
   };
