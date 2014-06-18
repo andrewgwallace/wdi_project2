@@ -87,7 +87,7 @@
 
 
     <div class='question-manager'>
-
+      <% if current_user %>
       <script id="questionTemplate" type="text/template">
       <a href=''data-reveal-id=<%%="modal" + id %>><div class='trend_quest' <%%= id %>>
       <h4 class="question_content"><%%= content %></h4>
@@ -108,6 +108,7 @@
         <a class="close-reveal-modal">&#215;</a>
       </div>
       </script>
+      <% end %>
 
   <!-- Next result button -->
   <a class="close-reveal-modal">&#215;</a>
