@@ -45,7 +45,7 @@ QuestionView.prototype.render = function(){
    if (this.model.range_min === null && this.model.results[0] !== 0 && this.model.results[1] !== 0 && this.model.content !== "") {
     this.addGraphOptions();
     this.addGraphOptionAnswer();
-  } else if (this.model.option_1 === null && this.model.results[0][2] != 0 && this.model.content !== "") {
+  } else if (this.model.option_1 === null && this.model.content !== "") {
     this.addGraphOptions();
     this.addGraphRangeAnswer();
   } else if (this.model.results[0] === 0 && this.model.content !== "") {

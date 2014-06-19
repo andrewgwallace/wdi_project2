@@ -20,17 +20,34 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
-    @answer = Answer.new
+   @question = Question.find(params[:id])
+   @answer = Answer.new
 
-    respond_to do |f|
-      f.html
-      f.json {render :json => [@question.answers.where(option_answer: @question.option_1).length,
-        @question.answers.where(option_answer: @question.option_2).length]}
-
+   @range_answers = []
+   @question.answers.each do |answer|
+   @range_answers << answer["range_answer"]
     end
 
-  end
+   @superarr = []
+   unique = @range_answers.uniq
+   unique.each do |element|
+     @superarr << [element, 0, @range_answers.count(element)]
+   end
+
+
+   respond_to do |f|
+     if @question.option_1 != nil
+     f.html
+     f.json {render :json => [@question.answers.where(option_answer: @question.option_1).length,
+       @question.answers.where(option_answer: @question.option_2).length]}
+     else
+     f.html
+     f.json {render :json => @superarr}
+   end
+
+   end
+
+ end
 
 
 private
