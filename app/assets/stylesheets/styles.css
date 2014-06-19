@@ -1,3 +1,6 @@
+body {
+  background-color: #F7F7F3;
+}
 #container {
     margin: 0 auto;
     width: 900px;
@@ -51,7 +54,7 @@ a:hover {
   transition: background-color 300ms ease-out;
 }
   .trend_quest:hover, .trend_quest:focus {
-    background-color: #bababa;
+    background-color: #FBF82B;
   }
   /*.trend_quest:hover, .trend_quest:focus {
     color: white;
@@ -71,13 +74,13 @@ a:hover {
   transition: background-color 300ms ease-out;
 }
 .ask{
-  background-color: #8AE6B8;
+  background-color: #73CABE;
 }
 .answer {
-  background-color: #FF80B2;
+  background-color: #E68FD7;
 }
 .ask:hover, .ask:focus {
-    background-color: #6EB893;
+    background-color: #5CA298;
   }
 .answer:hover, .answer:focus {
     background-color: #CF6890;

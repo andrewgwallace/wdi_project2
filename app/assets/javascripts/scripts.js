@@ -496,11 +496,21 @@ QuestionsCollection.prototype.appendListenersToAnswers = function(){
     var newAnswerInput = $(this).serializeArray();
     // console.log($('input[name=radioName]:checked', '#answer_form').val());
 
+    if ( $("#useless").attr("class") !== "" ){
+
     console.log({question_id: $('#answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, option_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
     answersCollection.create({question_id: $('#answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, option_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+    }
+    else {
+
+     console.log({question_id: $('#answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, range_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+    answersCollection.create({question_id: $('#answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, range_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+  }
+
 //     AnswersCollection.create({question_id: $('.question_option_1').parent().attr('id'), user_id: newAnswerInput[3].value, option_answer: $('input[name=radioName]:checked', '#answer_form').val(), comment: newAnswerInput[2].value});
 
       resetForm($('#answer_form'));
+      this.foundation('reveal', 'close');
   });
 
     // AnswersCollection.create({question_id: $('.question_option_1').parent().attr('id'), user_id: current_user, option_answer: $(".question_option_1").textContent, comment: text, submit})

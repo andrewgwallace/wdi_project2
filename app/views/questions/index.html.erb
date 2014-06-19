@@ -86,38 +86,46 @@
 <!-- Results modal ref link the people are talking in layout -->
 
 
-    <div class='question-manager'>
+
       <% if current_user %>
       <script id="questionTemplate" type="text/template">
-      <a href=''data-reveal-id=<%%="modal" + id %>><div class='trend_quest' <%%= id %>>
-      <h4 class="question_content"><%%= content %></h4>
-      </div></a>
+
       <div id=<%%="modal" + id %> class="reveal-modal" data-reveal>
-          <h4 class="question_title"><%%= content %></h4>
-          <div class="question_options" id=<%%= id %>>
-            <form class='answer_form'>
+        <h4 class="question_title"><%%= content %></h4>
+        <div class="question_options" id=<%%= id %>>
+          <small id="useless" class=<%%= option_1 %>></small>
+          <form class='answer_form'>
+            <%% if (option_1 !== null) { %>
             <input type="radio" class="question_option_1" name="radioName" value=<%%= option_1 %>><label for=<%%= option_1 %>><%%= option_1 %></label>
             <input type="radio" class="question_option_2" name="radioName" value=<%%= option_2 %>><label for=<%%= option_2 %>><%%= option_2 %></label>
+            <%% } else {%>
+              <input type="range" name="range_answer" min=<%%= range_min %> max=<%%= range_max %>>
+            <%% } %>
             <input type"text" class="comment" name='comment'>
             <input type="hidden" name="user_id" value=<%=current_user.id %>>
             <input type="submit">
-            </form>
-          </div>
+          </form>
         </div>
-          </div>
         <a class="close-reveal-modal">&#215;</a>
       </div>
+
+      <a href='#' data-reveal-id=<%%="modal" + id %>>
+        <div class='trend_quest'>
+          <h4 class="question_content"><%%= content %></h4>
+        </div>
+      </a>
+      <%% $(document).foundation(); %>
       </script>
       <% end %>
 
+
   <!-- Next result button -->
-  <a class="close-reveal-modal">&#215;</a>
-</div>
 </br>
 <div id="myModal" class="reveal-modal" data-reveal>
 
   <div id="container">
     <button type="button" class="next secondary button">Next</button>
   </div>
+  <a class="close-reveal-modal">&#215;</a>
 </div>
 
