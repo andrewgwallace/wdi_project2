@@ -1,5 +1,8 @@
-<h2>Sign up</h2>
-
+<div class="signup">
+  <center>
+<h3>We've been expecting you</h3>
+<small>Join us</small>
+</br></br>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
@@ -18,7 +21,9 @@
   <div><%= f.label :ethnicity %><%= f.select :ethnicity, ['-', 'American Indian', 'Asian', 'Black/African American', 'Hispanic/Latino', 'White', 'Other'] %></div>
   <div><%= f.label "Religious Views" %><%= f.select :religion, ['-', 'Agnostic', 'Atheist', 'Buddhist', 'Christian', 'Hindu', 'Jewish',  'Muslim', 'Other'] %></div>
 </br>
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+</div>
 
-<%= render "devise/shared/links" %>
+  <div class="subin subup"><%= f.submit "Sign up" %></div>
+<% end %>
+</center>
+<!--<%= render "devise/shared/links" %>-->

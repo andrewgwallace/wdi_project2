@@ -10,7 +10,6 @@ function Question(questionJSON){
   this.something = "something";
   this.results = "default value";
   this.fetchAnswers();
-  // this.results = [];
 }
 
 Question.prototype.addResults = function(resultsData){
@@ -38,31 +37,11 @@ function QuestionView(model){
 
 }
 
-QuestionView.prototype.renderTrending = function(){
-  $.each(this.model, function(i, element) {
-  // var newElement = "<a href=''data-reveal-id='questModal'><div class='trend_quest " + element.id + "'>"
-  //  + element.content +
-  //  "<div class='element.option_1' value=''>" + element.option_1 +
-  //  "</div></a></br>"
-  // $("#actual_question").html(questionHTML);
-
-  var questionTemplate = _.template($("#questionTemplate").text());
-  var questionHTML = questionTemplate(element);
-  // $("#actual_question").html(questionHTML);
-  $("#trending").append(questionHTML);
-  console.log("I'm in the renderTrending, and this is the model", element.content);
-});
-
-  // $("#actual_question").html(questionHTML);
-
-}
-
 QuestionView.prototype.render = function(){
 
   console.log(this.model);
   console.log(this.model.results);
-  // var newElement = $("<h1 class='question_list'>").html(this.model.results[0]);
-  // $('.question-manager').html(newElement);
+
    if (this.model.range_min === null && this.model.results[0] !== 0 && this.model.results[1] !== 0 && this.model.content !== "") {
     this.addGraphOptions();
     this.addGraphOptionAnswer();
@@ -72,11 +51,9 @@ QuestionView.prototype.render = function(){
   } else if (this.model.results[0] === 0 && this.model.content !== "") {
     var newElement = $("<h1 class='question_list'>").html("The question: <br>'" + this.model.content + "' <br>doesn't have any answers yet.<br> Be the first to answer!")
     $('#container').html(newElement);
-    // $('.question-manager').html(newElement);
   } else if (this.model.results[0][0] === 0 && this.model.content !== "") {
     var newElement = $("<h1 class='question_list'>").html("The question: <br>'" + this.model.content + "' <br>doesn't have any answers yet.<br> Be the first to answer!")
     $('#container').html(newElement);
-    // $('.question-manager').html(newElement);
    } else {
     questionsCollection.nextQuestion();
     }
@@ -86,218 +63,85 @@ QuestionView.prototype.render = function(){
 QuestionView.prototype.addGraphOptions = function() {
 
           /**
-   * Dark theme for Highcharts JS
-   * @author Torstein Honsi
-   */
+ * Grid-light theme for Highcharts JS
+ * @author Torstein Honsi
+ */
+
+// Load the fonts
+Highcharts.createElement('link', {
+   href: 'http://fonts.googleapis.com/css?family=Dosis:400,600',
+   rel: 'stylesheet',
+   type: 'text/css'
+}, null, document.getElementsByTagName('head')[0]);
+
+Highcharts.theme = {
+   colors: ["#7cb5ec", "#f7a35c", "#90ee7e", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+   chart: {
+      backgroundColor: null,
+      style: {
+         fontFamily: "Dosis, sans-serif"
+      }
+   },
+   title: {
+      style: {
+         fontSize: '16px',
+         fontWeight: 'bold',
+         textTransform: 'uppercase'
+      }
+   },
+   tooltip: {
+      borderWidth: 0,
+      backgroundColor: 'rgba(219,219,216,0.8)',
+      shadow: false
+   },
+   legend: {
+      itemStyle: {
+         fontWeight: 'bold',
+         fontSize: '13px'
+      }
+   },
+   xAxis: {
+      gridLineWidth: 0,
+      lineWidth: 0,
+      minorGridLineWidth: 0,
+   lineColor: 'transparent',
+      labels: {
+        enabled: false,
+         style: {
+            fontSize: '12px'
+         },
+         minorTickLength: 0,
+   tickLength: 0
+      }
+   },
+   yAxis: {
+      minorTickInterval: 'auto',
+      title: {
+         style: {
+            textTransform: 'uppercase'
+         }
+      },
+      labels: {
+         style: {
+            fontSize: '12px'
+         }
+      }
+   },
+   plotOptions: {
+      candlestick: {
+         lineColor: '#404048'
+      }
+   },
 
 
-  Highcharts.createElement('link', {
-     href: 'http://fonts.googleapis.com/css?family=Unica+One',
-     rel: 'stylesheet',
-     type: 'text/css'
-  }, null, document.getElementsByTagName('head')[0]);
+   // General
+   background2: '#F0F0EA'
 
-  Highcharts.theme = {
-     colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
-        "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
-     chart: {
-        backgroundColor: {
-           linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-           stops: [
-              [0, '#2a2a2b'],
-              [1, '#3e3e40']
-           ]
-        },
-        style: {
-           fontFamily: "'Unica One', sans-serif"
-        },
-        plotBorderColor: '#606063'
-     },
-     title: {
-        style: {
-           color: '#E0E0E3',
-           textTransform: 'uppercase',
-           fontSize: '20px'
-        }
-     },
-     subtitle: {
-        style: {
-           color: '#E0E0E3',
-           textTransform: 'uppercase'
-        }
-     },
-     xAxis: {
-        gridLineColor: '#2a2a2b',
-        labels: {
-           style: {
-              color: '#E0E0E3'
-           }
-        },
-        lineColor: '#707073',
-        minorGridLineColor: '#2a2a2b',
-        tickColor: '#707073',
-        title: {
-           style: {
-              color: '#A0A0A3'
+};
 
-           }
-        }
-     },
-     yAxis: {
-        gridLineColor: '#2a2a2b',
-        labels: {
-           style: {
-              color: '#E0E0E3'
-           }
-        },
-        lineColor: '#2a2a2b',
-        minorGridLineColor: '#2a2a2b',
-        tickColor: '#2a2a2b',
-        tickWidth: 1,
-        title: {
-           style: {
-              color: '#A0A0A3'
-           }
-        }
-     },
-     tooltip: {
-        backgroundColor: 'rgba(0, 0, 0, 0.85)',
-        style: {
-           color: '#F0F0F0'
-        }
-     },
-     plotOptions: {
-        series: {
-           dataLabels: {
-              color: '#B0B0B3'
-           },
-           marker: {
-              lineColor: '#2a2a2b'
-           }
-        },
-        boxplot: {
-           fillColor: '#505053'
-        },
-        candlestick: {
-           lineColor: 'white'
-        },
-        errorbar: {
-           color: 'white'
-        }
-     },
-     legend: {
-        itemStyle: {
-           color: '#E0E0E3'
-        },
-        itemHoverStyle: {
-           color: '#FFF'
-        },
-        itemHiddenStyle: {
-           color: '#606063'
-        }
-     },
-     credits: {
-        style: {
-           color: '#666'
-        }
-     },
-     labels: {
-        style: {
-           color: '#707073'
-        }
-     },
-
-     drilldown: {
-        activeAxisLabelStyle: {
-           color: '#F0F0F3'
-        },
-        activeDataLabelStyle: {
-           color: '#F0F0F3'
-        }
-     },
-
-     navigation: {
-        buttonOptions: {
-           symbolStroke: '#DDDDDD',
-           theme: {
-              fill: '#505053'
-           }
-        }
-     },
-
-     // scroll charts
-     rangeSelector: {
-        buttonTheme: {
-           fill: '#505053',
-           stroke: '#000000',
-           style: {
-              color: '#CCC'
-           },
-           states: {
-              hover: {
-                 fill: '#707073',
-                 stroke: '#000000',
-                 style: {
-                    color: 'white'
-                 }
-              },
-              select: {
-                 fill: '#000003',
-                 stroke: '#000000',
-                 style: {
-                    color: 'white'
-                 }
-              }
-           }
-        },
-        inputBoxBorderColor: '#505053',
-        inputStyle: {
-           backgroundColor: '#333',
-           color: 'silver'
-        },
-        labelStyle: {
-           color: 'silver'
-        }
-     },
-
-     navigator: {
-        handles: {
-           backgroundColor: '#666',
-           borderColor: '#AAA'
-        },
-        outlineColor: '#CCC',
-        maskFill: 'rgba(255,255,255,0.1)',
-        series: {
-           color: '#7798BF',
-           lineColor: '#A6C7ED'
-        },
-        xAxis: {
-           gridLineColor: '#2a2a2b'
-        }
-     },
-
-     scrollbar: {
-        barBackgroundColor: '#808083',
-        barBorderColor: '#808083',
-        buttonArrowColor: '#CCC',
-        buttonBackgroundColor: '#606063',
-        buttonBorderColor: '#606063',
-        rifleColor: '#FFF',
-        trackBackgroundColor: '#404043',
-        trackBorderColor: '#404043'
-     },
-
-     // special colors for some of the
-     legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
-     background2: '#505053',
-     dataLabelsColor: '#B0B0B3',
-     textColor: '#C0C0C0',
-     contrastTextColor: '#F0F0F3',
-     maskColor: 'rgba(255,255,255,0.3)'
-  };
-
-  // // Apply the theme
-  Highcharts.setOptions(Highcharts.theme);
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
 
 }
 
@@ -386,6 +230,44 @@ QuestionView.prototype.addGraphRangeAnswer = function() {
         return this;
 }
 
+// ************ Answer View *************
+function AnswerView(models) {
+console.log(models);
+  this.models = models;
+}
+
+AnswerView.prototype.renderTrending = function(){
+  $.each(this.models, function(i, element) {
+  var questionTemplate = _.template($("#questionTemplate").text());
+  var questionHTML = questionTemplate(element);
+  $("#trending").append(questionHTML);
+  console.log("I'm in the renderTrending, and this is the model", element.content);
+});
+
+}
+
+// ****NEW**** This will create an answer view that appends to the new div.
+// The model we're passing to this view is the same "currentQuestion" that we're using for
+// the graphs, so at the moment we're having the Questions Collection do double-duty
+//  as both what users can answer, and the results they're seeing.
+
+// ************ Answer Button View *************
+function AnswerButtonView(model) {
+console.log("this is the answerButtonView, and I'm a model", model);
+  this.model = model;
+}
+
+// ****NEW**** This will append the new "questionAnswerTemplate" template to the new modal "answerModal." RENAME MORE SEMANTICALLY
+AnswerButtonView.prototype.renderAsk = function(){
+
+  $("#answer_container").empty();
+  var questionTemplate = _.template($("#questionAnswerTemplate").text());
+  var questionHTML = questionTemplate(this.model);
+  $("#answer_container").html(questionHTML);
+  console.log("I'm in the renderAsk, and this is the model's content", this.model.content);
+
+}
+
 // ************ Answers Collection *************
 
 function AnswersCollection(){
@@ -420,6 +302,7 @@ QuestionsCollection.prototype.appendListeners = function () {
   $('.next').on('click', function(){
     self.nextQuestion();
   })
+
 }
 
 QuestionsCollection.prototype.add = function(questionJSON){
@@ -428,16 +311,24 @@ QuestionsCollection.prototype.add = function(questionJSON){
   $(this).trigger('trigg');
 }
 
-QuestionsCollection.prototype.renderTrendingQuestions = function() {
-  var questionView = new QuestionView(this.models);
-  questionView.renderTrending();
-
+// ****NEW**** This will pass the "current question" from the questions collection to the
+// new AnswerButtonView. We then "render" the template to the modal with the current question's
+// answers.
+QuestionsCollection.prototype.renderAskQuestions = function() {
+  var answerButtonView = new AnswerButtonView(this.models[this.currentRecord])
+  answerButtonView.renderAsk();
 }
 
-// QuestionsCollection.prototype.renderCurrentQuestion = function() {
-//   var questionView = new QuestionView(this.models[this.currentRecord]);
-//   questionView.render();
-// }
+QuestionsCollection.prototype.renderTrendingQuestions = function() {
+  var answerView = new AnswerView(this.models);
+  answerView.renderTrending();
+}
+
+QuestionsCollection.prototype.renderCurrentQuestion = function() {
+  var questionView = new QuestionView(this.models[this.currentRecord]);
+  questionView.render();
+}
+
 
 QuestionsCollection.prototype.nextQuestion = function () {
   var lengthArray = this.models.length;
@@ -448,7 +339,11 @@ QuestionsCollection.prototype.nextQuestion = function () {
     this.fetch();
   };
   this.renderCurrentQuestion();
-  console.log('working');
+// ****NEW**** this.renderAskQuestions(): will add each answer to the new questionAnswer template
+  this.renderAskQuestions();
+  this.renderTrendingQuestions();
+  console.log(' Next Question is being called and is working');
+  console.log(this.currentRecord);
 }
 
 QuestionsCollection.prototype.create = function(paramObject){
@@ -490,39 +385,44 @@ QuestionsCollection.prototype.appendListenersToAnswers = function(){
     });
 
     $('.answer_form').on('submit', function(e){
-      var self = this;
+// **** NEWER **** No idea why the e.preventDefault isn't working here.
+    var self = this;
     console.log(e);
     e.preventDefault();
     var newAnswerInput = $(this).serializeArray();
-    // console.log($('input[name=radioName]:checked', '#answer_form').val());
+
 
     if ( $("#useless").attr("class") !== "" ){
 
-    console.log({question_id: $('#answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, option_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
-    answersCollection.create({question_id: $('#answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, option_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+    console.log({question_id: $('.answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, option_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+    answersCollection.create({question_id: $('.answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, option_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
     }
     else {
 
-     console.log({question_id: $('#answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, range_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
-    answersCollection.create({question_id: $('#answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, range_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+     console.log({question_id: $('.answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, range_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+    answersCollection.create({question_id: $('.answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, range_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
   }
+// **** NEWER **** This will fix the reset form, as well as the nexQuestion issue.
+      resetForm($(self));
+      questionsCollection.nextQuestion();
 
-//     AnswersCollection.create({question_id: $('.question_option_1').parent().attr('id'), user_id: newAnswerInput[3].value, option_answer: $('input[name=radioName]:checked', '#answer_form').val(), comment: newAnswerInput[2].value});
-
-      resetForm($('#answer_form'));
-      this.foundation('reveal', 'close');
   });
 
-    // AnswersCollection.create({question_id: $('.question_option_1').parent().attr('id'), user_id: current_user, option_answer: $(".question_option_1").textContent, comment: text, submit})
 
 }
 
 
 QuestionsCollection.prototype.displayEntireCollection = function(){
     $('.questions').empty();
-      // this.renderCurrentQuestion();
-      this.renderTrendingQuestions();
+// **** NEWER **** Moved appendListenersToAnswers to the top of the following list so the
+// on.("click") functions work correctly.
       this.appendListenersToAnswers();
+      this.renderCurrentQuestion();
+      this.renderTrendingQuestions();
+// ****NEW**** This calls the renderAskQuestions function, so the new template/modal is
+// loaded when you click the "answer" button to see questions.
+      this.renderAskQuestions();
+
   }
 
 function resetForm($form) {
@@ -552,7 +452,6 @@ $(function(){
 
 
   $('#question_form').on('submit', function(e){
-    console.log(e);
     e.preventDefault();
     var newQuestionInput = $(this).serializeArray();
     console.log({content: newQuestionInput[0].value, option_1: newQuestionInput[1].value, option_2: newQuestionInput[2].value, user_id: newQuestionInput[3].value});
@@ -562,7 +461,6 @@ $(function(){
   });
 
   $('#question_form_this').on('submit', function(e){
-    console.log(e);
     e.preventDefault();
     var newQuestionInput = $(this).serializeArray();
     console.log({content: newQuestionInput[0].value, option_1: newQuestionInput[1].value, option_2: newQuestionInput[2].value, user_id: newQuestionInput[3].value});
@@ -572,7 +470,6 @@ $(function(){
   });
 
   $('#question_form_rank').on('submit', function(e){
-    console.log(e);
     e.preventDefault();
     var newQuestionInput = $(this).serializeArray();
     console.log({content: newQuestionInput[0].value, range_min: newQuestionInput[1].value, range_max: newQuestionInput[2].value, user_id: newQuestionInput[3].value});
@@ -580,42 +477,5 @@ $(function(){
 
       resetForm($('#question_form_rank'));
   });
-  $('.question-manager').on('click', 'div', function(){
-
-    $(this).children(".question_display").slideToggle();
-
-  })
-
-  // $('#question_option_1').on('click', function(){
-  //   console.log("i work");
-  // })
-
-
-// // REFERENCE
-//   $('.question-manager').on('click', 'div', function(){
-//     // alert($(this).children(".question_options").text());
-//     // alert("I'm question content. I work");
-//     // $(this).children(".question_options").slideToggle();
-//     $(this).children(".question_display").slideToggle();
-//     // $(".question_options").slideToggle();
-//   })
-
-//   // $('.question-manager').each(function(){
-//   //   var thisLink = $(this).children('h4');
-//   //   thisLink.click(function(){
-//   //     alert("I'm question content. I work");
-//   //     $(".question_options").slideToggle();
-//   //   });
-//   // });
-
-//   $('.question-manager').on('click', '.question_option_1', function(){
-//     alert("I'm option 1. I work");
-//   })
-
-//   $('.question-manager').on('click', '.question_option_2', function(){
-//     alert("I'm option 2. I work");
-//   })
-
-
 
 });

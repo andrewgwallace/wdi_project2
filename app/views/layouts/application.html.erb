@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Q</title>
+  <title>& A</title>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <link href='https://fonts.googleapis.com/css?family=Walter+Turncoat' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -10,7 +14,6 @@
     <script src="http://code.highcharts.com/highcharts.js"></script>
   <script src="http://code.highcharts.com/highcharts-more.js"></script>
   <script src="http://code.highcharts.com/modules/exporting.js"></script>
-  <script src="http://code.highcharts.com/highcharts-3d.js"></script>
 </head>
 <body>
   <!-- <img src="/assets/logo.png" class="logo"> -->
@@ -33,7 +36,7 @@
           <% if current_user %>
             <li><a href="/">Home</a></li>
             <li><a href="">My Q</a></li>
-            <li><a href="">Answer</a></li>
+            <li><a href="#" data-reveal-id="answerModal">Answer</a></li>
             <li><a href="" data-reveal-id="myModal">The people are talking...</a></li>
             <li><label>Settings</label></li>
             <li><%= link_to "Account", edit_user_registration_path %></li>
@@ -62,4 +65,3 @@
 
 </body>
 </html>
-

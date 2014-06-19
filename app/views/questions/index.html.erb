@@ -3,7 +3,7 @@
 <center>
 <% if current_user %>
   <a href="#" data-reveal-id="askModal" class="ask">Ask</a>
-  <a href="#" data-reveal-id="answertModal" class="answer">Answer</a>
+  <a href="#" data-reveal-id="answerModal" class="answer">Answer</a>
   <div id="askModal" class="reveal-modal medium" data-reveal>
     <h1>Ask away...</h1>
     <center>
@@ -15,7 +15,7 @@
   </div>
       <div id="yesnoModal" class="reveal-modal tiny" data-reveal>
         <h3>Yes or No</h3>
-        <small>? Yes/No</small>
+        <small>Should I take my shoes off when entering someone else's house? Yes/No</small>
         </br>
       </br>
         <form id='question_form' class"questionaire">
@@ -29,7 +29,7 @@
       </div>
       <div id="thisthatModal" class="reveal-modal tiny" data-reveal>
         <h3>This or That</h3>
-        <small>? /</small>
+        <small>Should I dress up or down on a first date? Dress-Up/Dress-Down</small>
         </br>
         </br>
         <form id='question_form_this' class"questionaire">
@@ -58,11 +58,13 @@
 
 <% else %>
     <!-- Sign on and in links for users not logged in -->
-  <h3>Looks like you're not signed in.</h3>
-  <h4>Feel free to browse around for questions</h4>
-  <p>Sign up or log in to answer questions and ask the community.</p>
-  <button><%= link_to "Sign Up", new_user_registration_path %></button>&nbsp&nbsp&nbsp&nbsp&nbsp
-  <button><%= link_to "Sign In", new_user_session_path %></button>
+  <div class="entry">
+    <h3>Looks like you're not logged in.</h3>
+    <h4>Feel free to browse around for questions</h4>
+    <p>Sign up or log in to answer questions and ask the community.</p>
+    <a href=<%= new_user_registration_path %>><button>Sign Up</button></a>&nbsp&nbsp&nbsp&nbsp&nbsp
+    <a href=<%= new_user_session_path %>><button>Log in&nbsp</button></a>
+</div>
 <% end %>
 </br>
 </center>
@@ -88,44 +90,86 @@
 
 
       <% if current_user %>
-      <script id="questionTemplate" type="text/template">
+        <script id="questionTemplate" type="text/template">
 
-      <div id=<%%="modal" + id %> class="reveal-modal" data-reveal>
-        <h4 class="question_title"><%%= content %></h4>
+        <div style="text-align: center;" id=<%%="modal" + id %> class="reveal-modal" data-reveal>
+          <h4 style="font-family: 'Lobster', cursive; font-size: 38px;"class="question_title"><%%= content %></h4>
+          <div class="question_options" id=<%%= id %>>
+            <small id="useless" class=<%%= option_1 %>></small>
+            <form class='answer_form'>
+              <%% if (option_1 !== null) { %>
+              <label style="text-transform:uppercase;" for=<%%= option_1 %>><%%= option_1 %></label>&nbsp&nbsp<input style="zoom:250%;" type="radio" class="question_option_1" name="radioName" value=<%%= option_1 %>><small> or</small>&nbsp
+              <input type="radio" style="zoom:250%;" class="question_option_2" name="radioName" value=<%%= option_2 %>>&nbsp<label style="text-transform:uppercase;" for=<%%= option_2 %>><%%= option_2 %></label></br>
+              <%% } else {%>
+                <p style="font-family: 'Walter Turncoat', cursive; font-size:20px;"><%%= range_min %> <input type="range" name="range_answer" min=<%%= range_min %> max=<%%= range_max %> step=1> <%%= range_max %></p>
+              <%% } %>
+              </br><input type"text" class="comment" name='comment' placeholder="Comment">
+              <input type="hidden" name="user_id" value=<%=current_user.id %>>
+              </br></br><input type="submit">
+            </form>
+          </div>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <a href='#' data-reveal-id=<%%="modal" + id %>>
+          <div class='trend_quest'>
+            <h4 style="font-family: 'Walter Turncoat', cursive;"class="question_content"><%%= content %></h4>
+          </div>
+        </a>
+        <%% $(document).foundation(); %>
+        </script>
+      <% else %>
+        <script id="questionTemplate" type="text/template">
+          <div id="wut" class="reveal-modal" data-reveal>
+            <h1 style="font-family: 'Permanent Marker', cursive;">We have your curiosity, may we have your attention?</h1>
+            <p>Sign up or log in to browse through the answers, and even ask your own <b style="font-family: 'PT Serif', serif;">Q</b>uestions!</p>
+            <small style="font-family: 'Permanent Marker', cursive;">Don&#39;t worry, you&#39;ll remain anonymous to other users.</small>
+
+            <a class="close-reveal-modal">&#215;</a>
+          </div>
+
+
+          <a href='#' data-reveal-id="wut">
+          <div class='trend_quest'>
+            <h4 style="font-family: 'Walter Turncoat', cursive;"class="question_content"><%%= content %></h4>
+          </div>
+        </a>
+        <%% $(document).foundation(); %>
+        </script>
+      <% end %>
+
+      <% if current_user %>
+      <script id="questionAnswerTemplate" type="text/template">
+
+      <div style="text-align: center;" id=<%%="questionAnswer#" + id %>>
+        <h4 style="font-family: 'Lobster', cursive; font-size: 38px;" class="question_title"><%%= content %></h4>
         <div class="question_options" id=<%%= id %>>
           <small id="useless" class=<%%= option_1 %>></small>
-          <form class='answer_form'>
+          <form class='answer_form question_answer_form'>
             <%% if (option_1 !== null) { %>
-            <input type="radio" class="question_option_1" name="radioName" value=<%%= option_1 %>><label for=<%%= option_1 %>><%%= option_1 %></label>
-            <input type="radio" class="question_option_2" name="radioName" value=<%%= option_2 %>><label for=<%%= option_2 %>><%%= option_2 %></label>
-            <%% } else {%>
-              <input type="range" name="range_answer" min=<%%= range_min %> max=<%%= range_max %>>
-            <%% } %>
-            <input type"text" class="comment" name='comment'>
+            <label style="text-transform:uppercase;" for=<%%= option_1 %>><%%= option_1 %></label>&nbsp&nbsp<input style="zoom:250%;" type="radio" class="question_option_1" name="radioName" value=<%%= option_1 %>><small> or</small>&nbsp
+              <input type="radio" style="zoom:250%;" class="question_option_2" name="radioName" value=<%%= option_2 %>>&nbsp<label style="text-transform:uppercase;" for=<%%= option_2 %>><%%= option_2 %></label></br>
+              <%% } else {%>
+                <p style="font-family: 'Walter Turncoat', cursive; font-size:20px;"><%%= range_min %> <input type="range" name="range_answer" min=<%%= range_min %> max=<%%= range_max %> step=1> <%%= range_max %></p>
+              <%% } %>
+              </br><input type"text" class="comment" name='comment' placeholder="Comment">
             <input type="hidden" name="user_id" value=<%=current_user.id %>>
             <input type="submit">
           </form>
         </div>
         <a class="close-reveal-modal">&#215;</a>
       </div>
-
-      <a href='#' data-reveal-id=<%%="modal" + id %>>
-        <div class='trend_quest'>
-          <h4 class="question_content"><%%= content %></h4>
-        </div>
-      </a>
       <%% $(document).foundation(); %>
       </script>
       <% end %>
 
-
   <!-- Next result button -->
 </br>
-<div id="answertModal" class="reveal-modal" data-reveal>
+<div id="answerModal" class="reveal-modal" data-reveal>
 
-  <div id="container">
-    <button type="button" class="next secondary button">Next</button>
+  <div id="answer_container">
   </div>
+  <button type="button" class="next secondary button">Next</button>
   <a class="close-reveal-modal">&#215;</a>
 </div>
 
@@ -133,8 +177,7 @@
 <div id="myModal" class="reveal-modal" data-reveal>
 
   <div id="container">
-    <button type="button" class="next secondary button">Next</button>
   </div>
+  <button type="button" class="next secondary button">Next</button>
   <a class="close-reveal-modal">&#215;</a>
 </div>
-
