@@ -31,15 +31,15 @@ class QuestionsController < ApplicationController
 
     respond_to do |f|
       f.html
-<<<<<<< HEAD
+# <<<<<<< HEAD
       f.json {render :json => {
         option_1_results: @question.answers.where(option_answer: @question.option_1).length,
         option_2_results: @question.answers.where(option_answer: @question.option_2).length}
       }
-=======
+# =======
       f.json {render :json => [@question.answers.where(option_answer: @question.option_1).length,
         @question.answers.where(option_answer: @question.option_2).length]}
->>>>>>> master
+# >>>>>>> master
 
     end
 

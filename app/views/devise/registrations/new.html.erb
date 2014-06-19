@@ -3,15 +3,21 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :value => user_email_maker %></div>
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-  <div><%= f.label :birth_year %><br />
-    <%= f.text_field :birth_year %></div>
+  <%= f.hidden_field :email, :value => gen_and_save_email_to_session %>
+
+<h3>Which image speaks to you?</h3>
+<div>
+<img class="gravatar" src="<%= retro %>" />
+<img class="gravatar" src="<%= identicon %>" /></div>
+</br>
+
+<div><%= f.text_field :username, placeholder: 'Username'  %></div></br>
+
+<div><%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %></div></br>
+
+<div><%= f.password_field :password_confirmation, autocomplete: "off", placeholder: 'Password Confirmation' %></div></br>
+<div><%= f.text_field :birth_year, placeholder: 'What year were you born?'  %></div></br>
   <div><%= f.label :gender %><%= f.select :gender, ['-', 'Female', 'Male'] %></div>
 
   <div><%= f.label "Sexual Orientation" %><%= f.select :orientation, ['-', 'Bi-Sexual', 'Gay', 'Lesbian', 'Straight', 'Transsexual', 'Transgender', 'Other'] %></div>
