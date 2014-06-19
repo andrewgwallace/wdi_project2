@@ -8,6 +8,8 @@ wdi_project2
 * <a href="https://github.com/KLIMTHAUS/wdi_project2">https://github.com/KLIMTHAUS/wdi_project2</a>
 * Application hosted on Heroku:
 * <a href="http://fierce-atoll-6518.herokuapp.com/">http://fierce-atoll-6518.herokuapp.com/</a>
+* * Trello board:
+* <a href="https://trello.com/b/L7uaYdj3/wdi-project-2/">https://trello.com/b/L7uaYdj3/wdi-project-2</a>
 	
 
 ## PLANNING & DELIVERABLES
