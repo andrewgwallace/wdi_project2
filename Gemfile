@@ -42,3 +42,5 @@ gem 'devise'
 gem 'pry-rails'
 gem 'rails_12factor'
 
+gem 'awesome_print'
+gem 'faker'

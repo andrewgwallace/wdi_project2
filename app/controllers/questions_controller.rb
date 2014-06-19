@@ -11,6 +11,12 @@ class QuestionsController < ApplicationController
   @current_user = current_user
   end
 
+  def answers_to_question
+
+
+
+  end
+
 
   def create
      question = Question.create(question_params)
@@ -21,8 +27,18 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @answer = Answer.new
-    @answers = @question.answers
+
+    respond_to do |f|
+      f.html
+      f.json {render :json => {
+        option_1_results: @question.answers.where(option_answer: @question.option_1).length,
+        option_2_results: @question.answers.where(option_answer: @question.option_2).length}
+      }
+
+    end
+
   end
+
 
 private
 
@@ -31,4 +47,3 @@ private
     end
 
 end
-
