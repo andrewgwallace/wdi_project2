@@ -240,7 +240,7 @@ AnswerView.prototype.renderTrending = function(){
   $.each(this.models, function(i, element) {
   var questionTemplate = _.template($("#questionTemplate").text());
   var questionHTML = questionTemplate(element);
-  $("#trending").append(questionHTML);
+  $("#trending").prepend(questionHTML);
   console.log("I'm in the renderTrending, and this is the model", element.content);
 });
 

@@ -11,6 +11,25 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require modernizr
+//= require underscore
+//= require backbone
+//= require fastclick
+//= require foundation
+//= require foundation.min
+//= require foundation.offcanvas
+//= require foundation.reveal
+//= require foundation.tab
+//= require foundation.topbar
+//= require jquery.cookie
+//= require placeholder
+//= require models/Question
+//= require models/Answer
+//= require views/questions/QuestionView
+//= require views/answers/AnswerView
+//= require collections/QuestionCollection
+//= require collections/AnswerCollection
+//= require views/questions/QuestionListView
+//= require views/answers/AnswerListView
+//= require scripts
