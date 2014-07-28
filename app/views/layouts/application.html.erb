@@ -3,16 +3,78 @@
 <head>
   <title>& A</title>
   <%= favicon_link_tag 'favicon.ico' %>
+
+
+  <!-- JAVASCRIPTS -->
+
+  <!-- TEMPLATES -->
+
+        <% if current_user %>
+        <script id="questionTemplate" type="text/template">
+
+        <div style="text-align: center;" id=<%%="modal" + id %> class="reveal-modal" data-reveal>
+          <h4 style="font-family: 'Lobster', cursive; font-size: 38px;"class="question_title"><%%= content %></h4>
+          <div class="question_options" id=<%%= id %>>
+            <small id="useless" class=<%%= option_1 %>></small>
+            <form class='answer_form'>
+              <%% if (option_1 !== null) { %>
+              <label style="text-transform:uppercase;" for=<%%= option_1 %>><%%= option_1 %></label>&nbsp&nbsp<input style="zoom:250%;" type="radio" class="question_option_1" name="radioName" value=<%%= option_1 %>><small> or</small>&nbsp
+              <input type="radio" style="zoom:250%;" class="question_option_2" name="radioName" value=<%%= option_2 %>>&nbsp<label style="text-transform:uppercase;" for=<%%= option_2 %>><%%= option_2 %></label></br>
+              <%% } else {%>
+                <p style="font-family: 'Walter Turncoat', cursive; font-size:20px;"><%%= range_min %> <input type="range" name="range_answer" min=<%%= range_min %> max=<%%= range_max %> step=1> <%%= range_max %></p>
+              <%% } %>
+              </br><input type"text" class="comment" name='comment' placeholder="Comment">
+              <input type="hidden" name="user_id" value=<%=current_user.id %>>
+              </br></br><input type="submit">
+            </form>
+          </div>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+
+        <a href='#' data-reveal-id=<%%="modal" + id %>>
+          <div class='trend_quest'>
+            <h4 style="font-family: 'Walter Turncoat', cursive;"class="question_content"><%%= content %></h4>
+          </div>
+        </a>
+        <%% $(document).foundation(); %>
+        </script>
+      <% else %>
+        <script id="questionTemplate" type="text/template">
+          <div id="wut" class="reveal-modal" data-reveal>
+            <h1 style="font-family: 'Permanent Marker', cursive;">We have your curiosity, may we have your attention?</h1>
+            <p>Sign up or log in to browse through the answers, and even ask your own <b style="font-family: 'PT Serif', serif;">Q</b>uestions!</p>
+            <small style="font-family: 'Permanent Marker', cursive;">Don&#39;t worry, you&#39;ll remain anonymous to other users.</small>
+
+            <a class="close-reveal-modal">&#215;</a>
+          </div>
+
+
+          <a href='#' data-reveal-id="wut">
+          <div class='trend_quest'>
+            <h4 style="font-family: 'Walter Turncoat', cursive;"class="question_content"><%%= content %></h4>
+          </div>
+        </a>
+        <%% $(document).foundation(); %>
+        </script>
+      <% end %>
+
+
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/highcharts-more.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+  <!-- STYLES -->
+
   <link href='https://fonts.googleapis.com/css?family=Walter+Turncoat' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-    <script src="http://code.highcharts.com/highcharts.js"></script>
-  <script src="http://code.highcharts.com/highcharts-more.js"></script>
-  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
 </head>
 <body>
   <!-- <img src="/assets/logo.png" class="logo"> -->
