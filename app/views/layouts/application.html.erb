@@ -17,7 +17,7 @@
           <div class="question_options" id=<%%= id %>>
             <small id="useless" class=<%%= option_1 %>></small>
             <form class='answer_form'>
-              <%% if (option_1 !== null) { %>
+              <%% if (range_min == null) { %>
               <label style="text-transform:uppercase;" for=<%%= option_1 %>><%%= option_1 %></label>&nbsp&nbsp<input style="zoom:250%;" type="radio" class="question_option_1" name="radioName" value=<%%= option_1 %>><small> or</small>&nbsp
               <input type="radio" style="zoom:250%;" class="question_option_2" name="radioName" value=<%%= option_2 %>>&nbsp<label style="text-transform:uppercase;" for=<%%= option_2 %>><%%= option_2 %></label></br>
               <%% } else {%>
@@ -36,7 +36,7 @@
             <h4 style="font-family: 'Walter Turncoat', cursive;"class="question_content"><%%= content %></h4>
           </div>
         </a>
-        <%% $(document).foundation(); %>
+        <script>$(document).foundation(); </script>
         </script>
       <% else %>
         <script id="questionTemplate" type="text/template">
@@ -54,7 +54,7 @@
             <h4 style="font-family: 'Walter Turncoat', cursive;"class="question_content"><%%= content %></h4>
           </div>
         </a>
-        <%% $(document).foundation(); %>
+        <script>$(document).foundation(); </script>
         </script>
       <% end %>
 

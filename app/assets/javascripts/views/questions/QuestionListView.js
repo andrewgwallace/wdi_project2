@@ -5,12 +5,14 @@ Qapp.Views.QuestionListView = Backbone.View.extend({
     this.listenTo( this.collection, "add", this.render );
   },
     render: function(){
-      console.log("question list view el", this.$el);
       var self = this;
-      this.$el.empty();
-      _.each( this.collection.models, function(question){
+      setTimeout(function(){
+      console.log("question list view el", this.$el);
+      self.$el.empty();
+      _.each( self.collection.models, function(question){
         var questionView = new Qapp.Views.QuestionView( {model: question} )
         self.$el.prepend( questionView.render().el );
-      })
+      });
+      }, 100)
     }
 })

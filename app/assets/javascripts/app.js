@@ -47,7 +47,5 @@ Qapp.initialize = function() {
 }
 
 $(function() {
-
   Qapp.initialize();
-
 })
