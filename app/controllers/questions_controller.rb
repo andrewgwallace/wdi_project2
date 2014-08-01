@@ -8,8 +8,8 @@ class QuestionsController < ApplicationController
   end
   @questions_all = Question.last(10)
   questions = Question.last(10)
-  respond_with questions
-  # respond_with questions, :include => :answers
+  # respond_with questions
+  respond_with questions, :include => :answers
   @current_user = current_user
   end
 
