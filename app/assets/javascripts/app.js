@@ -11,6 +11,12 @@ Qapp.initialize = function() {
 
   questionCollection.fetch();
 
+  var answersCollection = new Qapp.Collections.AnswerCollection();
+
+  // answersCollection.fetch({success:function(data){
+  //   console.log("Answers collection fetch working", data);
+  // }});
+
   function resetForm($form) {
     $form.find('input:text, input:password, input:file, select, textarea').val('');
     $form.find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
@@ -44,8 +50,37 @@ Qapp.initialize = function() {
       resetForm($('#question_form_rank'));
   });
 
+  setTimeout(function(){
+    $('.answer_form').on('submit', function(e){
+      console.log("answer form event", e);
+      console.log("answer form submit working");
+      e.preventDefault();
+      var newAnswerInput = $(this).serializeArray();
+      var self = this;
+      console.log("answerform this", this, "this.attributes", this.attributes);
+
+      if ( $("#useless").attr("class") !== "" ){
+
+      console.log({question_id: $('.answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, option_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+      answersCollection.create({question_id: $('.answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, option_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+      }
+      else {
+
+       console.log({question_id: $('.answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, range_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+      answersCollection.create({question_id: $('.answer_form').parent().attr('id'), user_id: newAnswerInput[2].value, range_answer: newAnswerInput[0].value, comment: newAnswerInput[1].value});
+    }
+  // **** NEWER **** This will fix the reset form, as well as the nexQuestion issue.
+        resetForm($(self));
+        // We will eventually use this to go to the next question, once we include the function for it?
+        // questionCollection.nextQuestion();
+
+    });
+  }, 2000);
+
 }
 
 $(function() {
   Qapp.initialize();
+
+
 })

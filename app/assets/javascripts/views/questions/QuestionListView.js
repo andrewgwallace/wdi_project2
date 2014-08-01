@@ -13,6 +13,6 @@ Qapp.Views.QuestionListView = Backbone.View.extend({
           var questionView = new Qapp.Views.QuestionView( {model: question} )
           self.$el.prepend( questionView.render().el );
        });
-      }, 100)
+      }, 800)
     }
 })

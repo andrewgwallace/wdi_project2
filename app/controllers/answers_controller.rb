@@ -3,6 +3,8 @@ class AnswersController < ApplicationController
  respond_to :json, :html
 
  before_action :authenticate_user!
+
+
   # def question
   #     @question = Question.find(params[:question_id])
   # end
@@ -35,6 +37,14 @@ class AnswersController < ApplicationController
     answer = Answer.create(answer_params)
     respond_with answer
   end
+
+  # def index
+
+  #   answers = Answer.where
+  #   respond_with answers
+
+  # end
+
 
   # def update
   #   Answer.find(params[:id]{
