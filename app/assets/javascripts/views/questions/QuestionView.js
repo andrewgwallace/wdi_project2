@@ -11,8 +11,8 @@ Qapp.Views.QuestionView = Backbone.View.extend({
   },
   render: function(){
     this.$el.html( this.template(this.model.attributes) );
-    // var listView = new Qapp.Views.AnswerListView({ collection: this.model.get('answers'), el: this.$el.find('.answers')
-    // });
+    var listView = new Qapp.Views.AnswerListView({ collection: this.model.get('answers'), el: this.$el.find('.answers')
+    });
     // listView.render();
     return this
   }
