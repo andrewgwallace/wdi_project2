@@ -29,15 +29,15 @@ Qapp.Views.QuestionView = Backbone.View.extend({
   render: function(){
     self = this;
     this.$el.html( this.template(this.model.attributes) );
-    var listView = new Qapp.Views.AnswerListView({ collection: this.model.get('answers'), el: this.$el.find('.answers')
-    });
-    model = this.collection;
-    console.log("new render model", model);
-    $(".answer").on("click", function(){
-      console.log("click function model", model);
-      self.renderGraph(model);
-      console.log("render answer click listener working");
-    })
+    // var listView = new Qapp.Views.AnswerListView({ collection: this.model.get('answers'), el: this.$el.find('.answers')
+    // });
+    // model = this.collection;
+    // console.log("new render model", model);
+    // $(".answer").on("click", function(){
+    //   console.log("click function model", model);
+    //   self.renderGraph(model);
+    //   console.log("render answer click listener working");
+    // })
     // listView.render();
     return this
   }

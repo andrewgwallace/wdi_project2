@@ -59,6 +59,11 @@
         </script>
       <% end %>
 
+     <script id="answerGraphTemplate" type="text/template">
+      <div class="test">
+        <h1 style="font-family: 'Permanent Marker', cursive;">Hello I work and here are some results <%%= results %></h1>
+      </div>
+    </script>
 
 
 
@@ -122,6 +127,30 @@
 
     </div>
   </div>
+
+    <!-- Modals -->
+
+    <!-- Results modal ref link the people are talking in layout -->
+
+  <!-- Next result button -->
+  </br>
+  <div id="answerModal" class="reveal-modal" data-reveal>
+
+    <div id="answer_container">
+    </div>
+    <button type="button" class="next secondary button">Next</button>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+
+
+  <div id="myModal" class="reveal-modal" data-reveal>
+
+    <div id="container">
+    </div>
+    <button type="button" class="next secondary button">Next</button>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+
 
   <script>
     $(document).foundation();

@@ -77,6 +77,16 @@ Qapp.initialize = function() {
     });
   }, 2000);
 
+  $('.answer_display').on('click', function(){
+
+    var questionGraphListView = new Qapp.Views.QuestionListView({
+      collection: questionCollection,
+      el: $('#container')
+    });
+
+    questionGraphListView.renderGraphs();
+
+  })
 
 
 }
