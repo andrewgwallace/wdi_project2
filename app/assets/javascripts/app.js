@@ -11,9 +11,9 @@ Qapp.initialize = function() {
 
   questionCollection.fetch();
 
-  var answersCollection = new Qapp.Collections.AnswerCollection();
+  // var answersCollection = new Qapp.Collections.AnswerCollection();
 
-  // answersCollection.fetch({success:function(data){
+  // answersCollection.fetch({data: $.param({  }) ,success:function(data){
   //   console.log("Answers collection fetch working", data);
   // }});
 
@@ -77,10 +77,13 @@ Qapp.initialize = function() {
     });
   }, 2000);
 
+
+
 }
 
 $(function() {
   Qapp.initialize();
+
 
 
 })

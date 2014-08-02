@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
 
   def show
    @question = Question.find(params[:id])
-   @answer = Answer.new
+   # @answer = Answer.new
 
    @range_answers = []
    @question.answers.each do |answer|

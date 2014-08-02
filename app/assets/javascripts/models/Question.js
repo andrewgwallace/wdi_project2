@@ -12,6 +12,7 @@ Qapp.Models.Question = Backbone.Model.extend({
     option_1: '',
     option_2: '',
     range_min: '',
-    range_max: ''
+    range_max: '',
+    results: ''
   }
 })

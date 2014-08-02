@@ -9,6 +9,7 @@ Qapp.Models.Answer = Backbone.Model.extend({
     question_id: "",
     range_answer: "",
     option_answer: "",
-    comment: ""
+    comment: "",
+    results: "hello"
   }
 })

@@ -40,8 +40,28 @@ class AnswersController < ApplicationController
 
   # def index
 
-  #   answers = Answer.where
-  #   respond_with answers
+  #  @answer = Answer.find(params[:question_id])
+
+  #  @range_answers = []
+  #  @answers.each do |answer|
+  #  @range_answers << answer["range_answer"]
+  #   end
+
+  #  @superarr = []
+  #  unique = @range_answers.uniq
+  #  unique.each do |element|
+  #    @superarr << [element, 0, @range_answers.count(element)]
+  #  end
+
+  #  respond_to do |f|
+  #    if @answer.option_1 != nil
+  #    f.html
+  #    f.json {render :json => [@answer.option_1.length,
+  #      @answer.option_2.length]}
+  #    else
+  #    f.html
+  #    f.json {render :json => @superarr}
+  #  end
 
   # end
 
