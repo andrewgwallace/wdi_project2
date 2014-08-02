@@ -2,6 +2,7 @@ var Qapp = Qapp || { Models: {}, Collections: {}, Views: {} };
 
 Qapp.Views.AnswerView = Backbone.View.extend({
   initialize: function(){
+    currentRecord = 0;
   },
   tagName: 'div',
   // template: _.template($('answerGraphTemplate').html()),
