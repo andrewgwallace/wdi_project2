@@ -7,28 +7,20 @@ Qapp.Views.QuestionView = Backbone.View.extend({
   // $pepe: (".answer"),
   tagName: "div",
   template: _.template( $("#questionTemplate").html() ),
+  questionAnswerTemplate: _.template( $(".questionAnswerTemplate").html() ),
   events: {
     // Not sure yet what we'll put here
     // 'click $pepe' : 'renderGraph'
   },
-    renderGraph: function(model){
-      console.log("rendergragh working");
-      var self = this;
-      console.log("renderGraph self", self);
-        $.ajax({
-          url: '/questions/' + model.attributes.id,
-          dataType: 'json',
-          method: 'GET',
-          async: false
-        }).done(function(data){
-          self.results = data;
-          console.log("rendergraph data success", data);
-          // self.addResults(data)
-      });
-    },
   render: function(){
     self = this;
     this.$el.html( this.template(this.model.attributes) );
+    return this
+  },
+  //Upon click of the "Answer" button, renderQuestionAnswer will launch a modal showing each question, with a next button to go from one to the other
+  renderQuestionAnswer: function() {
+    self = this;
+    this.$el.html( this.questionAnswerTemplate(this.model.attributes) )
     return this
   }
 

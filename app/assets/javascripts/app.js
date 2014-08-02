@@ -88,6 +88,17 @@ Qapp.initialize = function() {
 
   })
 
+  $('.answer').on('click', function(){
+    console.log("answer click working");
+    var questionAnswerListView = new Qapp.Views.QuestionListView({
+      collection: questionCollection,
+      el: $('#answer_container')
+    });
+
+    questionAnswerListView.renderQuestionAnswer();
+
+  })
+
 
 }
 

@@ -24,7 +24,18 @@ Qapp.Views.QuestionListView = Backbone.View.extend({
       self.$el.empty();
       _.each( self.collection.models, function(question) {
         var answerView = new Qapp.Views.AnswerView( {model: question} )
-        self.$el.prepend( answerView.render().el );
+        self.$el.prepend( answerView.renderResults().el );
+      } )
+    },
+    // The following function will render the questions from the "answer" button. I'll next have to create a function within the questionView to render the models.
+    renderQuestionAnswer: function() {
+      var self = this;
+      console.log("renderQuestionAnswer in the Question List View is being hit");
+      console.log("renderQuestionAnswer $el", self.$el);
+      self.$el.empty();
+      _.each( self.collection.models, function(question) {
+        var questionAnswerView = new Qapp.Views.QuestionView( {model: question} )
+        self.$el.prepend( questionAnswerView.renderQuestionAnswer().el );
       } )
     }
 })

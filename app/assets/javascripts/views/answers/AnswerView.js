@@ -6,7 +6,7 @@ Qapp.Views.AnswerView = Backbone.View.extend({
   },
   tagName: 'div',
   // template: _.template($('answerGraphTemplate').html()),
-  render: function(){
+  renderResults: function(){
     console.log("AnswerView being hit");
     console.log("answerView model", this.model);
     // this.$el.empty();

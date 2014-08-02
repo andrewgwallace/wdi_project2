@@ -59,12 +59,15 @@
         </script>
       <% end %>
 
-     <script id="answerGraphTemplate" type="text/template">
-      <div class="test">
-        <h1 style="font-family: 'Permanent Marker', cursive;">Hello I work and here are some results <%%= results %></h1>
-      </div>
-    </script>
 
+      <script class="questionAnswerTemplate" type="text/template">
+
+        <div style="text-align: center;" id=<%%="modal" + id %> class="reveal-modal" data-reveal>
+          <h4 style="font-family: 'Lobster', cursive; font-size: 38px;"class="question_title"><%%= content %></h4>
+          </div>
+          <a class="close-reveal-modal">&#215;</a>
+        </div>
+    </script>
 
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
